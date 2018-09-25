@@ -5,9 +5,21 @@ from flask import request
 from flask import make_response
 from flask import abort
 import json
+import time
+import logging
 
-app = Flask(__name__)
+
 ERROR_RESP = False
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
+def init():
+    for i in range(5):
+        logger.info("Starting app atempt {}".format(i+1))
+        time.sleep(5)
+    return Flask(__name__)
+
+app = init()
 
 @app.route("/", methods=['GET'])
 def index():
@@ -24,4 +36,4 @@ def chenge_resp():
     return make_response(json.dumps({"result": "ok"}))
 
 if __name__ == "__main__":
-    app.run()
+   app.run()
