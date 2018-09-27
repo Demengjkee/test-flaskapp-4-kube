@@ -15,4 +15,5 @@ ENV FLASK_APP=/opt/app/main.py
 ENTRYPOINT ["flask", "run"]
 CMD ["--host=0.0.0.0"]
 
-HEALTHCHECK CMD curl -f localhost:5000 
+HEALTHCHECK --interval=5s --timeout=1s --start-period=60s --retries=1\
+  CMD curl -f localhost:5000 || exit 1

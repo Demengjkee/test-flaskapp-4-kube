@@ -4,6 +4,7 @@ from flask import render_template
 from flask import request
 from flask import make_response
 from flask import abort
+from flask import jsonify
 import json
 import time
 import logging
@@ -27,13 +28,23 @@ def index():
     if not ERROR_RESP:
         return make_response(render_template("index.html", name="index"), 200)
     else:
-        abort(403)
+        abort(502)
 
-@app.route("/change_resp", methods=['POST'])
+
+@app.route("/break", methods=['POST'])
 def chenge_resp():
     global ERROR_RESP
     ERROR_RESP = not ERROR_RESP
-    return make_response(json.dumps({"result": "ok"}))
+    return jsonify({"result": "ok"})
+
+
+@app.route("/healthz", methods=['GET'])
+def healthz():
+    global ERROR_RESP
+    health = "healthy" if not ERROR_RESP else "unhealthy"
+    resp = {"health": health}
+    return jsonify(resp)
+
 
 if __name__ == "__main__":
    app.run()

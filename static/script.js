@@ -15,6 +15,6 @@ function submit(path) {
 
 function msg() {
     console.log("message sent");
-    var reqPath = "change_resp";
+    var reqPath = "break";
     submit(reqPath);
 }
