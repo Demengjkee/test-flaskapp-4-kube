@@ -1,15 +1,35 @@
 # test-flaskapp-4-kube
 
-build:
+## Description
+This is an example of the simplest application to fail by request.
+Application is supposed to start (be ready) in 30 sec after creation.
 
-`docker build -t <image-name> .`
+## HOWTO
 
-run:
+### Build
+```
+docker build -t << image-name >> .
+```
 
-`docker run --rm -d -p 5000:5000 <image-name>`
+### Run
+```
+docker run --rm -d -p 5000:5000 << image-name >>
+```
 
+### Check Status
+```
+# Get unhealthy containers
+docker ps -f health=unhealthy
 
+# Get Helath status of the given contanier
+docker inspect --format='{{json .State.Health}}' << container_name >>
+```
 
-`docker ps -f health=unhealthy`
+### Getting Logs
+```
+# One-shot logs
+docker logs << container_name >>
 
-`docker inspect --format=‘{{json .State.Health}}’ << container_name >>`
+# Polling Logs
+docker logs -f << container_name >>
+```
