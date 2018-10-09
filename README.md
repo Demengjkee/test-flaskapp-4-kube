@@ -1,4 +1,4 @@
-# test-flaskapp-4-kube
+# Dockerfile: testing-healthcheck
 
 ## Description
 This is an example of the simplest application to fail by request.<br>
