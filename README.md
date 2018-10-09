@@ -1,8 +1,10 @@
 # test-flaskapp-4-kube
 
 ## Description
-This is an example of the simplest application to fail by request.
-Application is supposed to start (be ready) in 30 sec after creation.
+This is an example of the simplest application to fail by request.<br>
+Application is supposed to start (be ready) in 30 sec after creation.<br>
+
+Build on Python/FLASK
 
 ## HOWTO
 
@@ -16,8 +18,16 @@ docker build -t << image-name >> .
 docker run --rm -d -p 5000:5000 << image-name >>
 ```
 
+### Change Responce (Break it)
+```
+curl -X POST localhost:5000/break
+```
+
 ### Check Status
 ```
+# Get App health status
+curl localhost:5000/healthz
+
 # Get unhealthy containers
 docker ps -f health=unhealthy
 
