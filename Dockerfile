@@ -16,4 +16,4 @@ ENTRYPOINT ["flask", "run"]
 CMD ["--host=0.0.0.0"]
 
 HEALTHCHECK --interval=5s --timeout=1s --start-period=60s --retries=1\
-  CMD curl -f localhost:5000 || exit 1
+  CMD curl -s -f localhost:5000 || exit 1
